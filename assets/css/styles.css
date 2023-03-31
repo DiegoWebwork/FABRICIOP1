@@ -1,0 +1,46 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+
+}
+
+body {
+background-color: lightblue;
+display: flex;
+justify-content: center;
+width: 100vw;
+height: 100vh;
+}
+
+textarea {
+resize: none;
+border: none;
+padding: 8px;
+background-color: black;
+color: aquamarine;
+font-size: 24px;
+text-align: justify;
+
+}
+
+textarea:focus {
+border: 1px solid darkgray;
+}
+
+.content {
+display: flex;
+flex-direction: column;
+width: 100%;
+justify-content: space-around;
+background-image: url('./ia.png');
+
+}
+
+#question {
+height: 20%;
+}
+
+#result {
+height: 70%;
+}
