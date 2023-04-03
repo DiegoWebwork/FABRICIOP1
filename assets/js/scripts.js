@@ -47,7 +47,7 @@ inputQuestion.addEventListener("keypress", (e) => {
   if (inputQuestion.value && e.key === "Enter") SendQuestion();
 });
 
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = "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";
 
 function SendQuestion() {
   var sQuestion = inputQuestion.value;
@@ -63,7 +63,7 @@ function SendQuestion() {
       model: "text-davinci-003",
       prompt: sQuestion,
       max_tokens: 2048, // tamanho da resposta
-      temperature: 0.5, // criatividade na resposta
+      temperature: 0.7, // criatividade na resposta
     }),
   })
     .then((response) => response.json())
