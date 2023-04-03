@@ -1,54 +1,97 @@
-const inputQuestion = document.getElementById("question");
+const slides = document.querySelectorAll(".slide");
+ 
+slides.forEach((slide, indx) => {
+  slide.style.transform = `translateX(${indx * 100}%)`;
+});
 
+const nextSlide = document.querySelector(".btn-next");
+
+// current slide counter
+let curSlide = 0;
+// maximum number of slides
+let maxSlide = slides.length - 1;
+
+
+nextSlide.addEventListener("click", function () {
+    if (curSlide === maxSlide) {
+        curSlide = 0;
+    }   else {
+    curSlide++;
+  }
+
+
+  slides.forEach((slide, indx) => {
+    slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+  });
+});
+
+const prevSlide = document.querySelector(".btn-prev");
+
+prevSlide.addEventListener("click", function () {
+  if (curSlide === 0) {
+    curSlide = maxSlide;
+  } else {
+    curSlide--;
+  }
+
+ 
+  slides.forEach((slide, indx) => {
+    slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+  });
+});
+
+const inputQuestion = document.getElementById("question");
 const result = document.getElementById("result");
 
 inputQuestion.addEventListener("keypress", (e) => {
-if (inputQuestion.value && e.key === "Enter")
-sendQuestion();
+  if (inputQuestion.value && e.key === "Enter") SendQuestion();
 });
 
-const open_IA = "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";
+const OPENAI_API_KEY = "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";
 
-function sendQuestion() {
+function SendQuestion() {
+  var sQuestion = inputQuestion.value;
 
-var sQuestion = inputQuestion.value;
+  fetch("https://api.openai.com/v1/completions", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + OPENAI_API_KEY,
+    },
+    body: JSON.stringify({
+      model: "text-davinci-003",
+      prompt: sQuestion,
+      max_tokens: 2048, // tamanho da resposta
+      temperature: 0.5, // criatividade na resposta
+    }),
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      if (result.value) result.value += "\n";
 
-fetch("https://api.openai.com/v1/completions", {
-method: "POST",
-headers:{
-Accept: "application/json",
-"Content-Type": "Application/json",
-Authorization: "Bearer " + open_IA,
-},
-body: JSON.stringify({
-model:"text-davinci-003",
-prompt: sQuestion,
-max_tokens: 2048, // Tamanho da resposta
-temperature: 0.5, // Criatividade da resposta
-})
-})
-.then((response) => response.json())
-.then((json) => {
-if(result.value) result.value += "\n"
-if (json.error?.message) {
-result.value += `Error: ${json.error.mesage}`
-} else if (json.choices?.[0].text) {
-var text = json.choices[0].text || "sem resposta";
-result.value += "Chat GPT: " + text;
-}
-result.scrollTop = result.scrollHeight;
-})
-.catch((error) => console.log("Error: ", error))
-.finally(() => {
-inputQuestion.value = "";
-inputQuestion.disabled = true;
-inputQuestion.focus();
-});
+      if (json.error?.message) {
+        result.value += `Error: ${json.error.message}`;
+      } else if (json.choices?.[0].text) {
+        var text = json.choices[0].text || "Sem resposta";
 
+        result.value += "Chat GPT: " + text;
+      }
 
-if (result.value) result,value += "\n\n\n"
-result.value += `Mestre essa pessoa gostaria de saber: ${sQuestion}`
-inputQuestion.value = "Você vê o mestre e sua respiração imponente pronto a responder"
-inputQuestion.disabled = true;
-result.scrollTop = result.scrollHeight;
+      result.scrollTop = result.scrollHeight;
+    })
+    .catch((error) => console.error("Error:", error))
+    .finally(() => {
+      inputQuestion.value = "";
+      inputQuestion.disabled = false;
+      inputQuestion.focus();
+    });
+
+  if (result.value) result.value += "\n\n\n";
+
+  result.value += `Eu: ${sQuestion}`;
+  inputQuestion.value = "Carregando...";
+  inputQuestion.disabled = true;
+
+  result.scrollTop = result.scrollHeight;
 }
