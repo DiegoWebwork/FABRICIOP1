@@ -7,7 +7,7 @@ if (inputQuestion.value && e.key === "Enter")
 sendQuestion();
 });
 
-const open_IA = "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";
+const open_IA = "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";
 
 function sendQuestion() {
 
