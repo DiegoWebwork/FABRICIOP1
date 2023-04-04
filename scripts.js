@@ -90,7 +90,7 @@ function SendQuestion() {
   if (result.value) result.value += "\n\n\n";
 
   result.value += `Eu: ${sQuestion}`;
-  inputQuestion.value = "Carregando...";
+  inputQuestion.value = "só um momento...";
   inputQuestion.disabled = true;
 
   result.scrollTop = result.scrollHeight;
