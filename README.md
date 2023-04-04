@@ -5,6 +5,7 @@
 # Disciplina: Laboratório de Programação de Web Sites Dinâmicos 6º Periodo
 # Professor: Fabricio Dias
 
+url:https://diegowebwork.github.io/FABRICIOP1/
 
 # Introdução:
 Olá pessoal, segue a descrição da nossa prova: construir uma webpage de chat, com a integração da API do chat GPT, da openAI(como foi mostrado em sala de aula). Criar um slide com três imagens na homepage(javascript). Além disso, deverá ser postado no github e subir o projeto no github pages ou similar(colocar o link).
