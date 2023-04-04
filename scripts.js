@@ -6,9 +6,9 @@ slides.forEach((slide, indx) => {
 
 const nextSlide = document.querySelector(".btn-next");
 
-// current slide counter
+// contador atual
 let curSlide = 0;
-// maximum number of slides
+// numero maximo -1
 let maxSlide = slides.length - 1;
 
 
@@ -62,8 +62,8 @@ function SendQuestion() {
     body: JSON.stringify({
       model: "text-davinci-003",
       prompt: sQuestion,
-      max_tokens: 2048, // tamanho da resposta
-      temperature: 0.7, // criatividade na resposta
+      max_tokens: 2048, 
+      temperature: 0.7, 
     }),
   })
     .then((response) => response.json())
