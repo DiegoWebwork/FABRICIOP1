@@ -37,12 +37,12 @@ background-image: url('./ia.png');
 
 }
 
-#question {
-height: 20%;
+#result {
+height: 60%;
 }
 
-#result {
-height: 70%;
+#question {
+height: 30%;
 }
 
 .slider {
@@ -82,7 +82,7 @@ height: 70%;
   }
   
   .btn:active {
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
   
   .btn-prev {
